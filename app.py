@@ -4,6 +4,7 @@ import torch
 from transformers import pipeline, set_seed
 from transformers.pipelines import TextGenerationPipeline
 import streamlit as st
+import SessionState
 from SessionState import _SessionState, _get_session, _get_state
 import logging
 
