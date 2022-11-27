@@ -1,4 +1,4 @@
-from streamlit.legacy_caching.hashing import _CodeHasher
+from streamlit.caching.hashing import _CacheFuncHasher
 
 try:
     # Before Streamlit 0.65
@@ -16,7 +16,7 @@ class _SessionState:
         self.__dict__["_state"] = {
             "data": {},
             "hash": None,
-            "hasher": _CodeHasher(hash_funcs),
+            "hasher": _CacheFuncHasher(hash_funcs),
             "is_rerun": False,
             "session": session,
         }
