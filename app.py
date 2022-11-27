@@ -60,7 +60,7 @@ def main():
 
 
 def load_page(model: TextGenerationPipeline):
-    st.write("---")
+    # st.write("---")
 
     st.title("GPT-3 based A.I story generator")
     st.text("This app would continue a generated story of Rick and Morty from a Random Scenario, try editing the starters and see how your AI generated fanfiction story would sound like ")
@@ -95,7 +95,8 @@ def load_page(model: TextGenerationPipeline):
 
     if button_generate:
         try:
-            outputs = model(
+            with st.spinner('Wait for it...'):
+                    outputs = model(
                 input,
                 do_sample=True,
                 max_length=len(input) + slider,
@@ -107,6 +108,10 @@ def load_page(model: TextGenerationPipeline):
             input = st.text_area(
                 "Start your story:", output_text or "", height=50
             )
+                # time.sleep(5)
+            st.success('Done!')
+
+        
         except:
             pass
 
