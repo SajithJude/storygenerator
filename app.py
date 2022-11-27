@@ -5,7 +5,7 @@ from transformers import pipeline, set_seed
 from transformers.pipelines import TextGenerationPipeline
 import streamlit as st
 # import SessionState
-from SessionState import _SessionState, _get_session, _get_state
+# from SessionState import _SessionState, _get_session, _get_state
 import logging
 
 
@@ -69,18 +69,18 @@ def filter_bad_words(text: str) -> str:
 
 
 def main():
-    state = _get_state()
+    # state = st.session_state.
     st.set_page_config(page_title="Story Generator", page_icon="🛸")
 
     model = load_model()
     # set_seed(42)  # for reproducibility
 
-    load_page(state, model)
+    load_page(model)
 
-    state.sync()  # Mandatory to avoid rollbacks with widgets, must be called at the end of your app
+    # state.sync()  # Mandatory to avoid rollbacks with widgets, must be called at the end of your app
 
 
-def load_page(state: _SessionState, model: TextGenerationPipeline):
+def load_page(model: TextGenerationPipeline):
     disclaimer_short = """
     __Disclaimer__: 
 
@@ -131,40 +131,40 @@ def load_page(state: _SessionState, model: TextGenerationPipeline):
 
     st.title("Story Generator")
 
-    state.input = st.text_area(
+    input = st.text_area(
         "Start your story:",
-        state.input or STARTERS[randint(0, 6)],
+        input or STARTERS[randint(0, 6)],
         height=200,
         max_chars=5000,
     )
 
-    state.slider = st.slider(
+    slider = st.slider(
         "Max story length (longer scripts will take more time to generate):",
         50,
         1000,
-        state.slider,
+        
     )
 
-    if len(state.input) + state.slider > 5000:
+    if len(input) + slider > 5000:
         st.warning("Your story cannot be longer than 5000 characters!")
         st.stop()
 
     button_generate = st.button("Generate Story (burps)")
-    if st.button("Reset Prompt (Random)"):
-        state.clear()
+    # if st.button("Reset Prompt (Random)"):
+    #     state.clear()
 
     if button_generate:
         try:
             outputs = model(
-                state.input,
+                input,
                 do_sample=True,
-                max_length=len(state.input) + state.slider,
+                max_length=len(input) + slider,
                 top_k=50,
                 top_p=0.95,
                 num_return_sequences=1,
             )
             output_text = filter_bad_words(outputs[0]["generated_text"])
-            state.input = st.text_area(
+            input = st.text_area(
                 "Start your story:", output_text or "", height=50
             )
         except:
@@ -175,7 +175,7 @@ def load_page(state: _SessionState, model: TextGenerationPipeline):
         unsafe_allow_html=True,
     )
 
-    for i, line in enumerate(state.input.split("\n")):
+    for i, line in enumerate(input.split("\n")):
         if ":" in line:
             speaker, speech = line.split(":")
 
