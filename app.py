@@ -96,7 +96,7 @@ def load_page(model: TextGenerationPipeline):
         input = startaars
         return input
 
-    startaars = st.selectbox('select a starter', STARTERS, on_change=y)
+    startaars = st.selectbox('select a starter', (STARTERS[0],STARTERS[1],STARTERS[2],STARTERS[3],STARTERS[4],STARTERS[5]), on_change=y)
     show  = st.empty()
     intext = show.show( "Edit the starter to spice up the story:",
             startaars,
