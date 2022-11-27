@@ -133,7 +133,7 @@ def load_page(model: TextGenerationPipeline):
 
     input = st.text_area(
         "Start your story:",
-        input or STARTERS[randint(0, 6)],
+        STARTERS[randint(0, 6)],
         height=200,
         max_chars=5000,
     )
