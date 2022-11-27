@@ -106,7 +106,7 @@ def load_page(model: TextGenerationPipeline):
 
     if edit:
         input = intext
-
+        st.write(input)
         slider = st.slider(
             "Set your story's character length (longer scripts will take more time to generate):",
             50,
