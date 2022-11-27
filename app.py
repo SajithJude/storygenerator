@@ -80,10 +80,10 @@ def main():
     # state.sync()  # Mandatory to avoid rollbacks with widgets, must be called at the end of your app
 
 
-    def load_page(model: TextGenerationPipeline):
-        st.write("---")
+def load_page(model: TextGenerationPipeline):
+    st.write("---")
 
-        st.title("Story Generator")
+    st.title("Story Generator")
     # def display_textbox(start):
     #     show = st.text_area(
     #         "Edit the starter to spice up the story:",
@@ -96,6 +96,14 @@ def main():
         input = startaars
         return input
 
+    def slideback():
+        slider = st.slider(
+            "Set your story's character length (longer scripts will take more time to generate):",
+            50,
+            1000,  
+        )
+        return slider
+
     startaars = st.selectbox('select a starter', (STARTERS[0],STARTERS[1],STARTERS[2],STARTERS[3],STARTERS[4],STARTERS[5]), on_change=callbek)
     show  = st.empty()
     intext = show.text_area( "Edit the starter to spice up the story:",
@@ -107,12 +115,13 @@ def main():
     if edit:
         input = intext
         st.write(input)
-        slider = st.slider(
-            "Set your story's character length (longer scripts will take more time to generate):",
-            50,
-            1000,
+        slideback()
+        # slider = st.slider(
+        #     "Set your story's character length (longer scripts will take more time to generate):",
+        #     50,
+        #     1000,
             
-        )
+        # )
 
         if len(input) + slider > 5000:
             st.warning("Your story cannot be longer than 5000 characters!")
