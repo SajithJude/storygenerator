@@ -134,7 +134,7 @@ def load_page(model: TextGenerationPipeline):
                 )
                 output_text = outputs[0]["generated_text"]
                 input = st.text_area(
-                    "Start your story:", output_text or "", height=50
+                    "Start your story:", output_text, height=50
                 )
             except:
                 pass
