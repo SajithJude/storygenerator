@@ -70,11 +70,11 @@ def load_page(model: TextGenerationPipeline):
 
 
     with col2:
-        st.text("My purpose is not fetching butter afterall,\n Looks like I could generate stories too..")
+        st.text("My purpose is not fetching butter afterall,\nLooks like I could generate stories too..")
 
 
     
-    st.text("This app would continue a generated story of Rick and Morty from a Random Scenario,\n try editing the starters and see how your AI generated fanfiction story\n would sound like ")
+    st.text("This app would continue a generated story of Rick and Morty from a Random Scenario,\ntry editing the starters and see how your AI generated fanfiction story\nwould sound like ")
     # icon = "https://static.wikia.nocookie.net/rickandmorty/images/7/77/Butter_Robot.png/revision/latest?cb=20160910011723"
     st.write("---")
 
