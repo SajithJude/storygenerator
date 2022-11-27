@@ -98,7 +98,7 @@ def load_page(model: TextGenerationPipeline):
 
     startaars = st.selectbox('select a starter', (STARTERS[0],STARTERS[1],STARTERS[2],STARTERS[3],STARTERS[4],STARTERS[5]))
     show  = st.empty()
-    intext = show.show( "Edit the starter to spice up the story:",
+    intext = show( "Edit the starter to spice up the story:",
             startaars,
             height=200,
             max_chars=5000,)
