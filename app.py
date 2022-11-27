@@ -114,7 +114,7 @@ def load_page(model: TextGenerationPipeline):
         
     )
 
-    if len(input) + slider > 5000:
+    if slider > 2000:
         st.warning("Your story cannot be longer than 5000 characters!")
         st.stop()
 
