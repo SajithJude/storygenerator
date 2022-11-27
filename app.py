@@ -95,11 +95,10 @@ def load_page(model: TextGenerationPipeline):
     def callbek():
         input = startaars
         return input
-        
 
-    startaars = st.selectbox('select a starter', (STARTERS[0],STARTERS[1],STARTERS[2],STARTERS[3],STARTERS[4],STARTERS[5]), on_change=callbek)
+    startaars = st.selectbox('select a starter', (STARTERS[0],STARTERS[1],STARTERS[2],STARTERS[3],STARTERS[4],STARTERS[5]))
     show  = st.empty()
-    intext = show.text_area( "Edit the starter to spice up the story:",
+    intext = show.show( "Edit the starter to spice up the story:",
             startaars,
             height=200,
             max_chars=5000,)
@@ -107,54 +106,59 @@ def load_page(model: TextGenerationPipeline):
 
     if edit:
         input = intext
-        st.write(input)
-        slider = 150
 
-        # if len(input) + slider > 5000:
-        #     st.warning("Your story cannot be longer than 5000 characters!")
-        #     st.stop()
-
-        button_generate = st.button("Generate Story (burps)")
-        # if st.button("Reset Prompt (Random)"):
-        #     state.clear()
-
-        if button_generate:
-            try:
-                outputs = model(
-                    input,
-                    do_sample=True,
-                    max_length=len(input) + slider,
-                    top_k=50,
-                    top_p=0.95,
-                    num_return_sequences=1,
-                )
-                output_text = outputs[0]["generated_text"]
-                input = st.text_area(
-                    "Start your story:", output_text, height=150
-                )
-            except:
-                pass
-
-        st.markdown(
-            '<h2 style="font-family:Courier;text-align:center;">Your Story</h2>',
-            unsafe_allow_html=True,
-        )
-
-        for line in enumerate(input.split("\n")):
-            if ":" in line:
-                speaker, speech = line.split(":")
-
-                st.markdown(
-                    f'<p style="font-family:Courier;text-align:center;"><b>{speaker}:</b><br>{speech}</br></p>',
-                    unsafe_allow_html=True,
-                )
-            else:
-                st.markdown(
-                    f'<p style="font-family:Courier;text-align:center;">{line}</p>',
-                    unsafe_allow_html=True,
-                )
+    slider = st.slider(
+        "Set your story's character length (longer scripts will take more time to generate):",
+        50,
+        1000,
         
-        st.markdown("---")
+    )
+
+    if len(input) + slider > 5000:
+        st.warning("Your story cannot be longer than 5000 characters!")
+        st.stop()
+
+    button_generate = st.button("Generate Story (burps)")
+    # if st.button("Reset Prompt (Random)"):
+    #     state.clear()
+
+    if button_generate:
+        try:
+            outputs = model(
+                input,
+                do_sample=True,
+                max_length=len(input) + slider,
+                top_k=50,
+                top_p=0.95,
+                num_return_sequences=1,
+            )
+            output_text = outputs[0]["generated_text"]
+            input = st.text_area(
+                "Start your story:", output_text or "", height=50
+            )
+        except:
+            pass
+
+    st.markdown(
+        '<h2 style="font-family:Courier;text-align:center;">Your Story</h2>',
+        unsafe_allow_html=True,
+    )
+
+    for i, line in enumerate(input.split("\n")):
+        if ":" in line:
+            speaker, speech = line.split(":")
+
+            st.markdown(
+                f'<p style="font-family:Courier;text-align:center;"><b>{speaker}:</b><br>{speech}</br></p>',
+                unsafe_allow_html=True,
+            )
+        else:
+            st.markdown(
+                f'<p style="font-family:Courier;text-align:center;">{line}</p>',
+                unsafe_allow_html=True,
+            )
+    
+    st.markdown("---")
     # st.markdown(
     #     "_You can read about how to create your own story generator application [here](https://towardsdatascience.com/rick-and-morty-story-generation-with-gpt2-using-transformers-and-streamlit-in-57-lines-of-code-8f81a8f92692). The code for this project is on [Github](https://github.com/e-tony/Story_Generator)._"
     # )
