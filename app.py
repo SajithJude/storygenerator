@@ -63,7 +63,7 @@ def load_page(model: TextGenerationPipeline):
     # st.write("---")
 
     st.title("GPT-3 based A.I story generator")
-    col1, col2 = st.columns([1,3])
+    col1, col2 = st.columns([1,4])
 
     with col1:
         st.image("Butter_Robot.jpg",width=100)
