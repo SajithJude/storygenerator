@@ -114,7 +114,7 @@ def load_page(model: TextGenerationPipeline):
             
         )
 
-        if slider > 2000:
+        if len(input) + slider > 5000:
             st.warning("Your story cannot be longer than 5000 characters!")
             st.stop()
 
@@ -139,29 +139,29 @@ def load_page(model: TextGenerationPipeline):
             except:
                 pass
 
-            st.markdown(
-                '<h2 style="font-family:Courier;text-align:center;">Your Story</h2>',
-                unsafe_allow_html=True,
-            )
+        st.markdown(
+            '<h2 style="font-family:Courier;text-align:center;">Your Story</h2>',
+            unsafe_allow_html=True,
+        )
 
-            for i, line in enumerate(input.split("\n")):
-                if ":" in line:
-                    speaker, speech = line.split(":")
+        for i, line in enumerate(input.split("\n")):
+            if ":" in line:
+                speaker, speech = line.split(":")
 
-                    st.markdown(
-                        f'<p style="font-family:Courier;text-align:center;"><b>{speaker}:</b><br>{speech}</br></p>',
-                        unsafe_allow_html=True,
-                    )
-                else:
-                    st.markdown(
-                        f'<p style="font-family:Courier;text-align:center;">{line}</p>',
-                        unsafe_allow_html=True,
-                    )
-            
-            st.markdown("---")
-        # st.markdown(
-        #     "_You can read about how to create your own story generator application [here](https://towardsdatascience.com/rick-and-morty-story-generation-with-gpt2-using-transformers-and-streamlit-in-57-lines-of-code-8f81a8f92692). The code for this project is on [Github](https://github.com/e-tony/Story_Generator)._"
-        # )
+                st.markdown(
+                    f'<p style="font-family:Courier;text-align:center;"><b>{speaker}:</b><br>{speech}</br></p>',
+                    unsafe_allow_html=True,
+                )
+            else:
+                st.markdown(
+                    f'<p style="font-family:Courier;text-align:center;">{line}</p>',
+                    unsafe_allow_html=True,
+                )
+        
+        st.markdown("---")
+    # st.markdown(
+    #     "_You can read about how to create your own story generator application [here](https://towardsdatascience.com/rick-and-morty-story-generation-with-gpt2-using-transformers-and-streamlit-in-57-lines-of-code-8f81a8f92692). The code for this project is on [Github](https://github.com/e-tony/Story_Generator)._"
+    # )
 
 
 if __name__ == "__main__":
