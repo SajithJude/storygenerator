@@ -80,10 +80,10 @@ def main():
     # state.sync()  # Mandatory to avoid rollbacks with widgets, must be called at the end of your app
 
 
-def load_page(model: TextGenerationPipeline):
-    st.write("---")
+    def load_page(model: TextGenerationPipeline):
+        st.write("---")
 
-    st.title("Story Generator")
+        st.title("Story Generator")
     # def display_textbox(start):
     #     show = st.text_area(
     #         "Edit the starter to spice up the story:",
