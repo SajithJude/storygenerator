@@ -70,8 +70,7 @@ def load_model() -> TextGenerationPipeline:
 
 def main():
     # state = st.session_state.
-    icon = st.image("https://static.wikia.nocookie.net/rickandmorty/images/7/77/Butter_Robot.png/revision/latest?cb=20160910011723")
-    st.set_page_config(page_title="Story Generator", page_icon=icon)
+    st.set_page_config(page_title="Story Generator", page_icon="🛸")
 
     model = load_model()
     # set_seed(42)  # for reproducibility
@@ -119,14 +118,14 @@ def load_page(model: TextGenerationPipeline):
                 num_return_sequences=1,
             )
             output_text = outputs[0]["generated_text"]
-            # input = st.text_area(
-            #     "Start your story:", output_text or "", height=50
-            # )
+            input = st.text_area(
+                "Start your story:", output_text or "", height=50
+            )
         except:
             pass
 
     st.markdown(
-        '<h2 style="font-family:Courier;text-align:center;">And heres what happened later...</h2>',
+        '<h2 style="font-family:Courier;text-align:center;">And heres what happened later</h2>',
         unsafe_allow_html=True,
     )
 
