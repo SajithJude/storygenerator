@@ -71,14 +71,11 @@ def load_model() -> TextGenerationPipeline:
 def main():
     # state = st.session_state.
     st.set_page_config(page_title="Story Generator", page_icon="🛸")
-    if 'key' not in st.session_state:
-        st.session_state.key = 'value'
+
     model = load_model()
-    st.session_state.key = 'value2'
     # set_seed(42)  # for reproducibility
 
-    if st.session_state.key is 'value2':
-        load_page(model)
+    load_page(model)
 
     # state.sync()  # Mandatory to avoid rollbacks with widgets, must be called at the end of your app
 
