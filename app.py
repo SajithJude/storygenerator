@@ -85,6 +85,13 @@ def load_page(model: TextGenerationPipeline):
 
     st.title("Story Generator")
 
+    slider = st.slider(
+        "Set your story's length (longer scripts will take more time to generate):",
+        50,
+        1000,
+        
+    )
+
     input = st.text_area(
         "Start your story:",
         STARTERS[randint(0, 6)],
@@ -92,12 +99,7 @@ def load_page(model: TextGenerationPipeline):
         max_chars=5000,
     )
 
-    slider = st.slider(
-        "Set your story's length (longer scripts will take more time to generate):",
-        50,
-        1000,
-        
-    )
+
 
     if len(input) + slider > 5000:
         st.warning("Your story cannot be longer than 5000 characters!")
