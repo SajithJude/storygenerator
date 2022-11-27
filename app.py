@@ -70,7 +70,8 @@ def load_model() -> TextGenerationPipeline:
 
 def main():
     # state = st.session_state.
-    st.set_page_config(page_title="Story Generator", page_icon="🛸")
+    icon = st.image("https://static.wikia.nocookie.net/rickandmorty/images/7/77/Butter_Robot.png/revision/latest?cb=20160910011723")
+    st.set_page_config(page_title="Story Generator", page_icon=icon)
 
     model = load_model()
     # set_seed(42)  # for reproducibility
