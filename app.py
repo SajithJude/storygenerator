@@ -63,10 +63,21 @@ def load_page(model: TextGenerationPipeline):
     # st.write("---")
 
     st.title("GPT-3 based A.I story generator")
-    st.text("This app would continue a generated story of Rick and Morty from a Random Scenario, try editing the starters and see how your AI generated fanfiction story would sound like ")
+    col1, col2 = st.columns(2)
+
+    with col1:
+
+        st.image("Butter_Robot.jpg",width=100)
+
+
+    with col2:
+
+        st.text("#my purpose is not fetching butter afterall, I could generate stories too..")
+
+
+    
+    st.text("This app would continue a generated story of Rick and Morty from a Random Scenario,\n try editing the starters and see how your AI generated fanfiction story would sound like ")
     # icon = "https://static.wikia.nocookie.net/rickandmorty/images/7/77/Butter_Robot.png/revision/latest?cb=20160910011723"
-    st.image("Butter_Robot.jpg",width=100)
-    st.text("#my purpose is not fetching butter afterall, I could generate stories too..")
     st.write("---")
 
     slider = st.slider(
