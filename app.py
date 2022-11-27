@@ -95,14 +95,7 @@ def load_page(model: TextGenerationPipeline):
     def callbek():
         input = startaars
         return input
-
-    def slideback():
-        slider = st.slider(
-            "Set your story's character length (longer scripts will take more time to generate):",
-            50,
-            1000,  
-        )
-        return slider
+        
 
     startaars = st.selectbox('select a starter', (STARTERS[0],STARTERS[1],STARTERS[2],STARTERS[3],STARTERS[4],STARTERS[5]), on_change=callbek)
     show  = st.empty()
@@ -115,15 +108,14 @@ def load_page(model: TextGenerationPipeline):
     if edit:
         input = intext
         st.write(input)
-        slideback()
-        # slider = st.slider(
-        #     "Set your story's character length (longer scripts will take more time to generate):",
-        #     50,
-        #     1000,
+        slider = st.slider(
+            "Set your story's character length (longer scripts will take more time to generate):",
+            50,
+            1000,
             
-        # )
+        )
 
-        if len(input) + slideback() > 5000:
+        if len(input) + slider > 5000:
             st.warning("Your story cannot be longer than 5000 characters!")
             st.stop()
 
@@ -142,9 +134,9 @@ def load_page(model: TextGenerationPipeline):
                     num_return_sequences=1,
                 )
                 output_text = outputs[0]["generated_text"]
-                input = st.text_area(
-                    "Start your story:", output_text, height=50
-                )
+                # input = st.text_area(
+                #     "Start your story:", output_text, height=50
+                # )
             except:
                 pass
 
