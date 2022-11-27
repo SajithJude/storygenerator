@@ -1,4 +1,4 @@
-from streamlit.hashing import _CodeHasher
+from streamlit.legacy_caching.hashing import _CodeHasher
 
 try:
     # Before Streamlit 0.65
