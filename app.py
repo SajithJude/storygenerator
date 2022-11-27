@@ -63,8 +63,8 @@ def load_page(model: TextGenerationPipeline):
     st.write("---")
 
     st.title("Story Generator")
-    icon = "https://static.wikia.nocookie.net/rickandmorty/images/7/77/Butter_Robot.png/revision/latest?cb=20160910011723"
-    st.image(icon)
+    # icon = "https://static.wikia.nocookie.net/rickandmorty/images/7/77/Butter_Robot.png/revision/latest?cb=20160910011723"
+    st.image("Butter_Robot.jpg")
 
     slider = st.slider(
         "Set your story's length (longer scripts will take more time to generate):",
