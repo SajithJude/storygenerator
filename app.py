@@ -81,65 +81,34 @@ def main():
 
 
 def load_page(model: TextGenerationPipeline):
-    disclaimer_short = """
-    __Disclaimer__: 
-
-    _This website is for entertainment purposes only!_
-
-    This website uses a machine learning model to produce fictional stories.
-    Even though certain bad words get censored, the model may still produce hurtful, vulgar, violent or discriminating text. 
-    Use at your own discretion.
-    View the information in the sidebar for more details.
-    """
-    disclaimer_long = """
-    __Description__:
-
-    This project uses a [pre-trained GPT2 model](https://huggingface.co/gpt2), which was fine-tuned on [Rick and Morty transcripts](https://rickandmorty.fandom.com/wiki/Category:Transcripts), to generate new stories in the form of a dialog. 
-    For a detailed explanation of GPT2 and its architecture see the [original paper](https://d4mucfpksywv.cloudfront.net/better-language-models/language_models_are_unsupervised_multitask_learners.pdf), OpenAI’s [blog post](https://openai.com/blog/better-language-models/) or Jay Alammar’s [illustrated guide](http://jalammar.github.io/illustrated-gpt2/).
-
-    __Ethical considerations__:
-
-    The original GPT2 model was trained on WebText, which contains 45 million outbound links from Reddit (i.e. websites that comments reference).
-    While certain domains were removed, the model was trained on largely unfiltered content from the Internet, which contains biased and discriminating language.
-    
-    __[Model Card](https://github.com/openai/gpt-2/blob/master/model_card.md) (by OpenAI)__:
-
-    "_Here are some secondary use cases we believe are likely:_
-    - _Writing assistance: Grammar assistance, autocompletion (for normal prose or code)_
-    - _Creative writing and art: exploring the generation of creative, fictional texts; aiding creation of poetry and other literary art._
-    - _Entertainment: Creation of games, chat bots, and amusing generations._
-
-    _Out-of-scope use cases:_
-
-    _Because large-scale language models like GPT-2 do not distinguish fact from fiction, 
-    we don’t support use-cases that require the generated text to be true. Additionally, 
-    language models like GPT-2 reflect the biases inherent to the systems they were trained on, 
-    so we do not recommend that they be deployed into systems that interact with humans unless 
-    the deployers first carry out a study of biases relevant to the intended use-case. We found 
-    no statistically significant difference in gender, race, and religious bias probes between 
-    774M and 1.5B, implying all versions of GPT-2 should be approached with similar levels of 
-    caution around use cases that are sensitive to biases around human attributes._"
-
-    __Tech stack__:
-
-    This website was built using [Streamlit](https://www.streamlit.io/) and uses the [Transformers](https://huggingface.co/transformers/) library to generate text.
-    """
-    st.markdown(disclaimer_short)
-    st.sidebar.markdown(disclaimer_long)
-
-    # st.write("---")
+    st.write("---")
 
     st.title("Story Generator")
+    # def display_textbox(start):
+    #     show = st.text_area(
+    #         "Edit the starter to spice up the story:",
+    #         start,
+    #         height=200,
+    #         max_chars=5000,
+    #     )
+    #     return show
+    def callbek():
+        input = startaars
+        return input
 
-    input = st.text_area(
-        "Start your story:",
-        STARTERS[randint(0, 6)],
-        height=200,
-        max_chars=5000,
-    )
+    startaars = st.selectbox('select a starter', STARTERS, on_change=y)
+    show  = st.empty()
+    intext = show.show( "Edit the starter to spice up the story:",
+            startaars,
+            height=200,
+            max_chars=5000,)
+    edit = st.button("edit starter")
+
+    if edit:
+        input = intext
 
     slider = st.slider(
-        "Max story length (longer scripts will take more time to generate):",
+        "Set your story's character length (longer scripts will take more time to generate):",
         50,
         1000,
         
@@ -190,9 +159,9 @@ def load_page(model: TextGenerationPipeline):
             )
     
     st.markdown("---")
-    st.markdown(
-        "_You can read about how to create your own story generator application [here](https://towardsdatascience.com/rick-and-morty-story-generation-with-gpt2-using-transformers-and-streamlit-in-57-lines-of-code-8f81a8f92692). The code for this project is on [Github](https://github.com/e-tony/Story_Generator)._"
-    )
+    # st.markdown(
+    #     "_You can read about how to create your own story generator application [here](https://towardsdatascience.com/rick-and-morty-story-generation-with-gpt2-using-transformers-and-streamlit-in-57-lines-of-code-8f81a8f92692). The code for this project is on [Github](https://github.com/e-tony/Story_Generator)._"
+    # )
 
 
 if __name__ == "__main__":
