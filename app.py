@@ -108,16 +108,11 @@ def load_page(model: TextGenerationPipeline):
     if edit:
         input = intext
         st.write(input)
-        slider = st.slider(
-            "Set your story's character length (longer scripts will take more time to generate):",
-            50,
-            1000,
-            
-        )
+        slider = 150
 
-        if len(input) + slider > 5000:
-            st.warning("Your story cannot be longer than 5000 characters!")
-            st.stop()
+        # if len(input) + slider > 5000:
+        #     st.warning("Your story cannot be longer than 5000 characters!")
+        #     st.stop()
 
         button_generate = st.button("Generate Story (burps)")
         # if st.button("Reset Prompt (Random)"):
