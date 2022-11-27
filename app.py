@@ -107,61 +107,61 @@ def load_page(model: TextGenerationPipeline):
     if edit:
         input = intext
 
-    slider = st.slider(
-        "Set your story's character length (longer scripts will take more time to generate):",
-        50,
-        1000,
+        slider = st.slider(
+            "Set your story's character length (longer scripts will take more time to generate):",
+            50,
+            1000,
+            
+        )
+
+        if slider > 2000:
+            st.warning("Your story cannot be longer than 5000 characters!")
+            st.stop()
+
+        button_generate = st.button("Generate Story (burps)")
+        # if st.button("Reset Prompt (Random)"):
+        #     state.clear()
+
+        if button_generate:
+            try:
+                outputs = model(
+                    input,
+                    do_sample=True,
+                    max_length=len(input) + slider,
+                    top_k=50,
+                    top_p=0.95,
+                    num_return_sequences=1,
+                )
+                output_text = outputs[0]["generated_text"]
+                input = st.text_area(
+                    "Start your story:", output_text or "", height=50
+                )
+            except:
+                pass
+
+        st.markdown(
+            '<h2 style="font-family:Courier;text-align:center;">Your Story</h2>',
+            unsafe_allow_html=True,
+        )
+
+        for i, line in enumerate(input.split("\n")):
+            if ":" in line:
+                speaker, speech = line.split(":")
+
+                st.markdown(
+                    f'<p style="font-family:Courier;text-align:center;"><b>{speaker}:</b><br>{speech}</br></p>',
+                    unsafe_allow_html=True,
+                )
+            else:
+                st.markdown(
+                    f'<p style="font-family:Courier;text-align:center;">{line}</p>',
+                    unsafe_allow_html=True,
+                )
         
-    )
-
-    if slider > 2000:
-        st.warning("Your story cannot be longer than 5000 characters!")
-        st.stop()
-
-    button_generate = st.button("Generate Story (burps)")
-    # if st.button("Reset Prompt (Random)"):
-    #     state.clear()
-
-    if button_generate:
-        try:
-            outputs = model(
-                input,
-                do_sample=True,
-                max_length=len(input) + slider,
-                top_k=50,
-                top_p=0.95,
-                num_return_sequences=1,
-            )
-            output_text = outputs[0]["generated_text"]
-            input = st.text_area(
-                "Start your story:", output_text or "", height=50
-            )
-        except:
-            pass
-
-    st.markdown(
-        '<h2 style="font-family:Courier;text-align:center;">Your Story</h2>',
-        unsafe_allow_html=True,
-    )
-
-    for i, line in enumerate(input.split("\n")):
-        if ":" in line:
-            speaker, speech = line.split(":")
-
-            st.markdown(
-                f'<p style="font-family:Courier;text-align:center;"><b>{speaker}:</b><br>{speech}</br></p>',
-                unsafe_allow_html=True,
-            )
-        else:
-            st.markdown(
-                f'<p style="font-family:Courier;text-align:center;">{line}</p>',
-                unsafe_allow_html=True,
-            )
-    
-    st.markdown("---")
-    # st.markdown(
-    #     "_You can read about how to create your own story generator application [here](https://towardsdatascience.com/rick-and-morty-story-generation-with-gpt2-using-transformers-and-streamlit-in-57-lines-of-code-8f81a8f92692). The code for this project is on [Github](https://github.com/e-tony/Story_Generator)._"
-    # )
+        st.markdown("---")
+        # st.markdown(
+        #     "_You can read about how to create your own story generator application [here](https://towardsdatascience.com/rick-and-morty-story-generation-with-gpt2-using-transformers-and-streamlit-in-57-lines-of-code-8f81a8f92692). The code for this project is on [Github](https://github.com/e-tony/Story_Generator)._"
+        # )
 
 
 if __name__ == "__main__":
