@@ -12,24 +12,6 @@ import logging
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-# def load_bad_words() -> list:
-#     res_list = []
-
-#     try:
-#         file = urllib.request.urlopen(
-#             "https://raw.githubusercontent.com/coffee-and-fun/google-profanity-words/main/data/list.txt"
-#         )
-#         for line in file:
-#             dline = line.decode("utf-8")
-#             res_list.append(dline.split("\n")[0])
-#     except:
-#         logging.info("Failed to load bad words list.")
-
-#     return res_list
-
-
-# BAD_WORDS = load_bad_words()
-
 STARTERS = {
     0: "Rick: Morty, quick! Get in the car!\nMorty: Oh no, I can't do it Rick! Please not this again.\nRick: You don't have a choice! The crystal demons are going to eat you if you don't get in!",
     1: "Elon: Oh, you think you're all that Rick? Fight me in a game of space squash!\nRick: Let's go, you wanna-be genius!\nElon: SpaceX fleet, line up!",
@@ -49,7 +31,7 @@ def load_model() -> TextGenerationPipeline:
 
 def main():
     # state = st.session_state.
-    st.set_page_config(page_title="Jude Sajith", page_icon="🛸")
+    st.set_page_config(page_title="Jude Sajith", page_icon="🧠")
 
     model = load_model()
     # set_seed(42)  # for reproducibility
@@ -62,7 +44,7 @@ def main():
 def load_page(model: TextGenerationPipeline):
     # st.write("---")
 
-    st.title("GPT-3 based A.I story generator")
+    st.title("Rick and Morty A.I story generator")
     col1, col2 = st.columns([1,4])
 
     with col1:
