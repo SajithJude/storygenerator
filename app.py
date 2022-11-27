@@ -12,23 +12,23 @@ import logging
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 
-def load_bad_words() -> list:
-    res_list = []
+# def load_bad_words() -> list:
+#     res_list = []
 
-    try:
-        file = urllib.request.urlopen(
-            "https://raw.githubusercontent.com/coffee-and-fun/google-profanity-words/main/data/list.txt"
-        )
-        for line in file:
-            dline = line.decode("utf-8")
-            res_list.append(dline.split("\n")[0])
-    except:
-        logging.info("Failed to load bad words list.")
+#     try:
+#         file = urllib.request.urlopen(
+#             "https://raw.githubusercontent.com/coffee-and-fun/google-profanity-words/main/data/list.txt"
+#         )
+#         for line in file:
+#             dline = line.decode("utf-8")
+#             res_list.append(dline.split("\n")[0])
+#     except:
+#         logging.info("Failed to load bad words list.")
 
-    return res_list
+#     return res_list
 
 
-BAD_WORDS = load_bad_words()
+# BAD_WORDS = load_bad_words()
 
 STARTERS = {
     0: "Rick: Morty, quick! Get in the car!\nMorty: Oh no, I can't do it Rick! Please not this again.\nRick: You don't have a choice! The crystal demons are going to eat you if you don't get in!",
@@ -41,41 +41,44 @@ STARTERS = {
 }
 
 
-@st.cache(allow_output_mutation=True, suppress_st_warning=True)
+@st.cache(allow_output_mutation=True, suppress_st_warning=True,max_entries=1)
 def load_model() -> TextGenerationPipeline:
     return pipeline("text-generation", model="e-tony/gpt2-rnm")
 
 
-def filter_bad_words(text: str) -> str:
-    explicit = False
+# def filter_bad_words(text: str) -> str:
+#     explicit = False
 
-    res_text = text.lower()
-    for word in BAD_WORDS:
-        if word in res_text:
-            print(word)
-            res_text = res_text.replace(word, word[0] + "*" * len(word[1:]))
-            explicit = True
+#     # res_text = text.lower()
+#     # for word in BAD_WORDS:
+#     #     if word in res_text:
+#     #         print(word)
+#     #         res_text = res_text.replace(word, word[0] + "*" * len(word[1:]))
+#     #         explicit = True
 
-    if explicit:
-        output_text = ""
-        for oword, rword in zip(text.split(" "), res_text.split(" ")):
-            if oword.lower() == rword:
-                output_text += oword + " "
-            else:
-                output_text += rword + " "
-        text = output_text
+#     if explicit:
+#         output_text = ""
+#         for oword, rword in zip(text.split(" "), res_text.split(" ")):
+#             if oword.lower() == rword:
+#                 output_text += oword + " "
+#             else:
+#                 output_text += rword + " "
+#         text = output_text
 
-    return text
+#     return text
 
 
 def main():
     # state = st.session_state.
     st.set_page_config(page_title="Story Generator", page_icon="🛸")
-
+    if 'key' not in st.session_state:
+        st.session_state.key = 'value'
     model = load_model()
+    st.session_state.key = 'value2'
     # set_seed(42)  # for reproducibility
 
-    load_page(model)
+    if st.session_state.key is 'value2':
+        load_page(model)
 
     # state.sync()  # Mandatory to avoid rollbacks with widgets, must be called at the end of your app
 
@@ -163,7 +166,7 @@ def load_page(model: TextGenerationPipeline):
                 top_p=0.95,
                 num_return_sequences=1,
             )
-            output_text = filter_bad_words(outputs[0]["generated_text"])
+            output_text = outputs[0]["generated_text"]
             input = st.text_area(
                 "Start your story:", output_text or "", height=50
             )
