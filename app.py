@@ -130,7 +130,7 @@ def load_page(model: TextGenerationPipeline):
                 )
                 output_text = outputs[0]["generated_text"]
                 input = st.text_area(
-                    "Start your story:", output_text, height=50
+                    "Start your story:", output_text, height=150
                 )
             except:
                 pass
@@ -140,7 +140,7 @@ def load_page(model: TextGenerationPipeline):
             unsafe_allow_html=True,
         )
 
-        for i, line in enumerate(input.split("\n")):
+        for line in enumerate(input.split("\n")):
             if ":" in line:
                 speaker, speech = line.split(":")
 
