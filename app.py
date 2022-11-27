@@ -84,28 +84,28 @@ def load_page(model: TextGenerationPipeline):
     st.write("---")
 
     st.title("Story Generator")
-    # def display_textbox(start):
-    #     show = st.text_area(
-    #         "Edit the starter to spice up the story:",
-    #         start,
-    #         height=200,
-    #         max_chars=5000,
-    #     )
-    #     return show
-    def callbek():
-        input = startaars
-        return input
-
-    startaars = st.selectbox('select a starter', (STARTERS[0],STARTERS[1],STARTERS[2],STARTERS[3],STARTERS[4],STARTERS[5]))
-    show  = st.empty()
-    intext = show( "Edit the starter to spice up the story:",
-            startaars,
+    def display_textbox(start):
+        show = st.text_area(
+            "Edit the starter to spice up the story:",
+            start,
             height=200,
-            max_chars=5000,)
-    edit = st.button("edit starter")
+            max_chars=5000,
+        )
+        return show
 
+    startaars = st.selectbox('select a starter', STARTERS)
+    edit = st.button("edit starter")
     if edit:
-        input = intext
+        x= display_textbox(startaars)
+        input = x    
+
+
+    startie = st.button("nah Ill pass.")
+
+
+
+    if startie:
+        input = startaars
 
     slider = st.slider(
         "Set your story's character length (longer scripts will take more time to generate):",
