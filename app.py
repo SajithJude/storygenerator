@@ -70,7 +70,7 @@ def load_page(model: TextGenerationPipeline):
 
 
     with col2:
-        st.text("My purpose is not fetching butter afterall, I could generate stories too..")
+        st.text("My purpose is not fetching butter afterall,\n Looks like I could generate stories too..")
 
 
     
