@@ -49,7 +49,7 @@ def load_model() -> TextGenerationPipeline:
 
 def main():
     # state = st.session_state.
-    st.set_page_config(page_title="Story Generator", page_icon="🛸")
+    st.set_page_config(page_title="Jude Sajith", page_icon="🛸")
 
     model = load_model()
     # set_seed(42)  # for reproducibility
@@ -62,9 +62,11 @@ def main():
 def load_page(model: TextGenerationPipeline):
     st.write("---")
 
-    st.title("Story Generator")
+    st.title("GPT-3 based A.I story generator")
+    st.text("This app would continue a generated story of Rick and Morty from a Random Scenario, try editing the starters and see how your AI generated fanfiction story would sound like ")
     # icon = "https://static.wikia.nocookie.net/rickandmorty/images/7/77/Butter_Robot.png/revision/latest?cb=20160910011723"
-    st.image("Butter_Robot.jpg",width=30)
+    st.image("Butter_Robot.jpg",width=100)
+    st.text("#my purpose is not fetching butter afterall, I could generate stories too..")
 
     slider = st.slider(
         "Set your story's length (longer scripts will take more time to generate):",
