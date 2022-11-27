@@ -118,14 +118,14 @@ def load_page(model: TextGenerationPipeline):
                 num_return_sequences=1,
             )
             output_text = outputs[0]["generated_text"]
-            input = st.text_area(
-                "Start your story:", output_text or "", height=50
-            )
+            # input = st.text_area(
+            #     "Start your story:", output_text or "", height=50
+            # )
         except:
             pass
 
     st.markdown(
-        '<h2 style="font-family:Courier;text-align:center;">Your Story</h2>',
+        '<h2 style="font-family:Courier;text-align:center;">And heres what happened later...</h2>',
         unsafe_allow_html=True,
     )
 
