@@ -46,31 +46,11 @@ def load_model() -> TextGenerationPipeline:
     return pipeline("text-generation", model="e-tony/gpt2-rnm")
 
 
-# def filter_bad_words(text: str) -> str:
-#     explicit = False
-
-#     # res_text = text.lower()
-#     # for word in BAD_WORDS:
-#     #     if word in res_text:
-#     #         print(word)
-#     #         res_text = res_text.replace(word, word[0] + "*" * len(word[1:]))
-#     #         explicit = True
-
-#     if explicit:
-#         output_text = ""
-#         for oword, rword in zip(text.split(" "), res_text.split(" ")):
-#             if oword.lower() == rword:
-#                 output_text += oword + " "
-#             else:
-#                 output_text += rword + " "
-#         text = output_text
-
-#     return text
-
 
 def main():
     # state = st.session_state.
-    st.set_page_config(page_title="Story Generator", page_icon="🛸")
+    icon = "https://static.wikia.nocookie.net/rickandmorty/images/7/77/Butter_Robot.png/revision/latest?cb=20160910011723"
+    st.set_page_config(page_title="Story Generator", page_icon=icon)
 
     model = load_model()
     # set_seed(42)  # for reproducibility
@@ -95,7 +75,7 @@ def load_page(model: TextGenerationPipeline):
     input = st.text_area(
         "Start your story:",
         STARTERS[randint(0, 6)],
-        height=200,
+        height=100,
         max_chars=5000,
     )
 
